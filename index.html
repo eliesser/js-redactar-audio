@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="A simple JavaScript image compressor.">
+	<meta name="author" content="Chen Fengyuan">
+	<link rel="shortcut icon" href="./img/logo.png" type="image/x-icon" />
+	<link rel="apple-touch-icon" href="./img/logo.png" />
+	<title>APP SpeechToText + Analisis de sentimientos</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+		<!-- Font Awesome -->
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	
+	<style class="cp-pen-styles">
+
+		.loader {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		}
+
+		#wave {
+		height: 50px;
+		width: 50px;
+		fill: #885500;
+		}
+
+		#Line_1 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.15s;
+				animation-delay: 0.15s;
+		}
+
+		#Line_2 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.3s;
+				animation-delay: 0.3s;
+		}
+
+		#Line_3 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.45s;
+				animation-delay: 0.45s;
+		}
+
+		#Line_4 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.6s;
+				animation-delay: 0.6s;
+		}
+
+		#Line_5 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.75s;
+				animation-delay: 0.75s;
+		}
+
+		#Line_6 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.9s;
+				animation-delay: 0.9s;
+		}
+
+		#Line_7 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 1.05s;
+				animation-delay: 1.05s;
+		}
+
+		#Line_8 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 1.2s;
+				animation-delay: 1.2s;
+		}
+
+		#Line_9 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 1.35s;
+				animation-delay: 1.35s;
+		}
+
+		@-webkit-keyframes pulse {
+		0% {
+			-webkit-transform: scaleY(1);
+					transform: scaleY(1);
+			-webkit-transform-origin: 50% 50%;
+					transform-origin: 50% 50%;
+		}
+		50% {
+			-webkit-transform: scaleY(0.7);
+					transform: scaleY(0.7);
+			-webkit-transform-origin: 50% 50%;
+					transform-origin: 50% 50%;
+		}
+		100% {
+			-webkit-transform: scaleY(1);
+					transform: scaleY(1);
+			-webkit-transform-origin: 50% 50%;
+					transform-origin: 50% 50%;
+		}
+		}
+
+
+		#Line_10 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.15s;
+				animation-delay: 0.15s;
+		}
+
+		#Line_11 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.3s;
+				animation-delay: 0.3s;
+		}
+
+		#Line_12 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.45s;
+				animation-delay: 0.45s;
+		}
+
+		#Line_13 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.6s;
+				animation-delay: 0.6s;
+		}
+
+		#Line_14 {
+		-webkit-animation: pulse 1s infinite;
+				animation: pulse 1s infinite;
+		-webkit-animation-delay: 0.75s;
+				animation-delay: 0.75s;
+		}
+
+
+		@keyframes pulse {
+		0% {
+			-webkit-transform: scaleY(1);
+					transform: scaleY(1);
+			-webkit-transform-origin: 50% 50%;
+					transform-origin: 50% 50%;
+		}
+		50% {
+			-webkit-transform: scaleY(0.7);
+					transform: scaleY(0.7);
+			-webkit-transform-origin: 50% 50%;
+					transform-origin: 50% 50%;
+		}
+		100% {
+			-webkit-transform: scaleY(1);
+					transform: scaleY(1);
+			-webkit-transform-origin: 50% 50%;
+					transform-origin: 50% 50%;
+		}
+		}
+
+		</style>
+	
+	</head>
+	<body>
+
+	<div class="jumbotron rounded-0 bg-primary text-white" style="height: 100px;background-color: #885500!important;">
+		<div class="container" style="margin-top: -45px">
+		<img src="./img/logo.png" width="100px" style="float:left;position:relative;" />
+		<h1>APP Audio a Texto + Análisis de sentimientos<small class="h6">v1.0</small></h1>
+		<p class="lead">Gestión inteligente</p>
+		</div>
+	</div>
+
+	<div class="container">
+		<h3 id="titulo-principal">Sube tu audio aqui</h3>
+		<hr>
+		<div id="app">
+		<div class="card bg-light mb-4" id="file-upload-audio">
+			<div class="card-body">
+			<div class="p-5 text-center"><div id="input-file">Arrastra tu archivo de audio o <input type="file" id="file" name="file" accept="audio/wav, audio/mp3"></div>
+
+						<div class="loader" style="display:none;">
+							<svg id="wave" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 38.05" style="height: 120px!important; width: 120px !important;">
+							<title>Audio Wave</title>
+								<path id="Line_1" data-name="Line 1" d="M0.91,15L0.78,15A1,1,0,0,0,0,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H0.91Z"/>
+								<path id="Line_2" data-name="Line 2" d="M6.91,9L6.78,9A1,1,0,0,0,6,10V28a1,1,0,1,0,2,0s0,0,0,0V10A1,1,0,0,0,7,9H6.91Z"/>
+								<path id="Line_3" data-name="Line 3" d="M12.91,0L12.78,0A1,1,0,0,0,12,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H12.91Z"/>
+								<path id="Line_4" data-name="Line 4" d="M18.91,10l-0.12,0A1,1,0,0,0,18,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H18.91Z"/>
+								<path id="Line_5" data-name="Line 5" d="M24.91,15l-0.12,0A1,1,0,0,0,24,16v6a1,1,0,0,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H24.91Z"/>
+								<path id="Line_6" data-name="Line 6" d="M30.91,10l-0.12,0A1,1,0,0,0,30,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H30.91Z"/>
+								<path id="Line_7" data-name="Line 7" d="M36.91,0L36.78,0A1,1,0,0,0,36,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H36.91Z"/>
+								<path id="Line_8" data-name="Line 8" d="M42.91,9L42.78,9A1,1,0,0,0,42,10V28a1,1,0,1,0,2,0s0,0,0,0V10a1,1,0,0,0-1-1H42.91Z"/>
+								<path id="Line_9" data-name="Line 9" d="M48.91,15l-0.12,0A1,1,0,0,0,48,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H48.91Z"/>
+								</svg>
+						</div>
+
+			</div>
+			</div>
+		</div>
+		
+		<div class="row"> <!-- ROW 1 -->
+			<div class="col-lg-4 mb-4" id="div-procesamiento" style="display:none;">
+			<div class="card" style="height: 260px;">
+				<div class="card-body">
+
+				<div id="texto-procesamiento">
+						<div style="float:left;width: 70%;display: inline-block;"><h3 class="card-title">Tareas</h3></div>
+						<div style="float:right;width: 30%; display: inline-block;">
+							<div class="loader">
+							<div class="loader">
+								<svg id="wave" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 38.05">
+								<title>Audio Wave</title>
+								<path id="Line_1" data-name="Line 1" d="M0.91,15L0.78,15A1,1,0,0,0,0,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H0.91Z"/>
+								<path id="Line_2" data-name="Line 2" d="M6.91,9L6.78,9A1,1,0,0,0,6,10V28a1,1,0,1,0,2,0s0,0,0,0V10A1,1,0,0,0,7,9H6.91Z"/>
+								<path id="Line_3" data-name="Line 3" d="M12.91,0L12.78,0A1,1,0,0,0,12,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H12.91Z"/>
+								<path id="Line_4" data-name="Line 4" d="M18.91,10l-0.12,0A1,1,0,0,0,18,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H18.91Z"/>
+								<path id="Line_5" data-name="Line 5" d="M24.91,15l-0.12,0A1,1,0,0,0,24,16v6a1,1,0,0,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H24.91Z"/>
+								<path id="Line_6" data-name="Line 6" d="M30.91,10l-0.12,0A1,1,0,0,0,30,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H30.91Z"/>
+								<path id="Line_7" data-name="Line 7" d="M36.91,0L36.78,0A1,1,0,0,0,36,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H36.91Z"/>
+								<path id="Line_8" data-name="Line 8" d="M42.91,9L42.78,9A1,1,0,0,0,42,10V28a1,1,0,1,0,2,0s0,0,0,0V10a1,1,0,0,0-1-1H42.91Z"/>
+								<path id="Line_9" data-name="Line 9" d="M48.91,15l-0.12,0A1,1,0,0,0,48,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H48.91Z"/>
+								</svg>
+							</div>
+							</div>
+						</div>    
+				</div>
+				
+				<div style="clear:both"></div>  
+				<hr>
+				
+				<fieldset class="form-group">
+					<div class="form-check form-check-inline">
+					<div id="icono0"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+					<label id="label0" class="form-check-label" for="inputCheckOrientation" style="padding:5px;opacity: 0.4;">Subir archivo de audio al servidor</label>
+					</div>
+					<div class="form-check form-check-inline">
+					<div id="icono1"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+					<label id="label1" class="form-check-label" for="inputCheckOrientation" style="padding:5px;opacity: 0.4;">Convertir formato a .WAV / MONO</label>
+					</div>
+					<div class="form-check form-check-inline">
+					<div id="icono2"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+					<label id="label2" class="form-check-label" for="inputCheckOrientation" style="padding:5px;opacity: 0.4;">Transcribir de audio a texto</label>
+					</div>
+					<div class="form-check form-check-inline">
+					<div id="icono3"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+					<label id="label3" class="form-check-label" for="inputCheckOrientation" style="padding:5px;opacity: 0.4;">Analizar sentimientos en el texto</label>
+					</div>
+				</fieldset>
+	
+				</div>
+			</div>
+			</div>
+			
+			<div class="col-lg-4 mb-4" id="audio-original" style="display:none;">
+			<div class="card" style="height: 260px;">
+				<div class="card-body">
+				<h3 class="card-title">Audio Original</h3>
+				<hr>
+				<div id="reproductor" style="text-align:center; padding-top:40px;">
+					<audio id="miAudio" controls="controls" src="conversacion1.mp3"></audio>
+				</div>
+						
+				</div>
+			</div>
+			</div>
+			
+			
+			<div class="col-lg-4 mb-4" id="metadatos" style="display:none;">
+			<div class="card" style="height: 260px;">
+				<div class="card-body">
+				<div class="form-check form-check-inline">
+					<h3 class="card-title" id="texto-info">Tiempo trans: </h3> 
+					<h3 id="time_trans" style="padding-left:10px;"></h3>			
+				</div> 
+				<hr>
+				<fieldset class="form-group">
+					<div class="form-check form-check-inline">
+					<i class="fa fa-info-circle" aria-hidden="true"></i>
+					<label id="label4" class="form-check-label" for="inputCheckOrientation" style="padding:5px;">Nombre:</label>
+					</div><br/>
+					<div class="form-check form-check-inline">
+					<i class="fa fa-info-circle" aria-hidden="true"></i>
+					<label id="label5" class="form-check-label" for="inputCheckOrientation" style="padding:5px;">Tipo:</label>
+					</div><br/>
+					<div class="form-check form-check-inline">
+					<i class="fa fa-info-circle" aria-hidden="true"></i>
+					<label id="label6" class="form-check-label" for="inputCheckOrientation" style="padding:5px;">Duración:</label>
+					</div><br/>
+					<div class="form-check form-check-inline">
+					<i class="fa fa-info-circle" aria-hidden="true"></i>
+					<label id="label7" class="form-check-label" for="inputCheckOrientation" style="padding:5px;">Tasa de rateo:</label>
+					</div>
+				</fieldset>
+				</div>
+			</div>
+			</div>
+			
+
+		</div> <!-- ROW 1 -->
+		
+		
+		
+		
+		
+		
+		
+		
+		<div class="row">
+
+			<div class="col-lg-12 mb-12" id="resultados-container" style="display:none;">
+			<br>
+			
+			<div class="card" id="audio-texto" style="display:block;">
+				<div class="card-body">
+				<h3 class="card-title">Audio a Texto:</h3>
+				<hr>
+				<div class="row">
+		
+					<div class="col-md-12 d-flex" id="resultado-container2">
+						<div class="w-100" id="resultado2" style="text-align:justify;"></div>
+					</div>
+				
+				</div>
+				</div>
+			</div>
+			
+			<br>
+
+			<div class="card" id="analisis-opinion" style="display:none;">
+				<div class="card-body">
+				<h3 class="card-title" id="veredicto"></h3>
+				<hr>
+				<div class="row">
+		
+					<div class="col-md-12 d-flex" id="resultado-container3">
+						<pre>
+							<div class="w-100" id="resultado3"></div>
+						</pre>
+					</div>
+				
+				</div>
+				</div>
+			</div>
+		
+			
+		</div>
+		</div>
+	</div>
+
+  	<footer><br><br></footer>
+
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<!-- Spanish words -->
+	<script src="js/afinn_es.js"></script>
+	<!-- Emoticons -->
+	<script src="js/afinn_emoticon.js"></script>
+	<!-- Algorithm -->
+	<script src="js/sentiment.js"></script>
+	<!-- Plataforma -->
+	<script src="js/principal2.js"></script>
+
+</body>
+</html>

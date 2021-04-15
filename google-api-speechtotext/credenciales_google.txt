@@ -1,0 +1,4 @@
+set GOOGLE_APPLICATION_CREDENTIALS="C:\key_private\siscom-2-7b04490fd9ed.json"
+
+// Actual
+set GOOGLE_APPLICATION_CREDENTIALS="C:\key_private\voice-268715-b6cde6c83a12.json"
